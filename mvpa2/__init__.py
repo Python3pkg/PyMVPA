@@ -167,7 +167,7 @@ if cfg.getboolean('debug', 'pdb', default=False):
         else:
             import traceback, pdb
             traceback.print_exception(type, value, tb)
-            print
+            print()
             pdb.post_mortem(tb)
     sys.excepthook = _pymvpa_pdb_excepthook
 

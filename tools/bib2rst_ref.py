@@ -112,10 +112,10 @@ def format_author(s, full_surname = False):
         # take lastname verbatim
         lastname = slist[0].strip()
         # remerge possible surnames with spaces if any
-        surnames = u' '.join(slist[1:])
+        surnames = ' '.join(slist[1:])
 
         # get nicely formated surnames concat with spaces
-        surname = u' '.join( [ format_surname(i, full_surname) for i in surnames.split() ] )
+        surname = ' '.join( [ format_surname(i, full_surname) for i in surnames.split() ] )
 
 
     else:
@@ -131,24 +131,24 @@ def format_author(s, full_surname = False):
             # seems like we have lastname->surname order
             if slist[0] in ('von', 'van'):
                 lastname = slist[0] + ' ' + slist[1]
-                surnames = u' '.join(slist[2:])
+                surnames = ' '.join(slist[2:])
             else:
                 lastname = slist[0]
-                surnames = u' '.join(slist[1:])
+                surnames = ' '.join(slist[1:])
 
         else:
             # the lastname is last
             lastname = slist[-1]
 
             if slist[-2] in ('von', 'van'):
-                lastname = slist[-2] + u' ' + lastname
-                surnames = u' '.join(slist[:-2])
+                lastname = slist[-2] + ' ' + lastname
+                surnames = ' '.join(slist[:-2])
             else:
-                surnames = u' '.join(slist[:-1])
+                surnames = ' '.join(slist[:-1])
 
-        surname = u' '.join( [ format_surname(i, full_surname) for i in surnames.split() ] )
+        surname = ' '.join( [ format_surname(i, full_surname) for i in surnames.split() ] )
 
-    return lastname + u', ' + surname
+    return lastname + ', ' + surname
 
 
 ##REF: Name was automagically refactored
@@ -160,9 +160,9 @@ def join_author_list(alist):
     if not len(alist) > 1:
         return format_author(alist[0])
 
-    ret = u', '.join( [ format_author(a) for a in alist[:-1] ] )
+    ret = ', '.join( [ format_author(a) for a in alist[:-1] ] )
 
-    ret += u' & ' + format_author( alist[-1] )
+    ret += ' & ' + format_author( alist[-1] )
 
     return ret
 
@@ -237,14 +237,14 @@ class BibTeX(dict):
 
             eprops = {}
 
-            for k,v in entry[4].iteritems():
+            for k,v in entry[4].items():
                 # figure out what the last argument really does
                 # leaving in -1 seems to be save
                 value = _bibtex.expand(file, v,  0)[2]
                 try:
-                    value = unicode(value, 'utf-8')
-                except UnicodeDecodeError, e:
-                    print "ERROR: Failed to decode string '%s'" % value
+                    value = str(value, 'utf-8')
+                except UnicodeDecodeError as e:
+                    print("ERROR: Failed to decode string '%s'" % value)
                     raise
                 if k.lower() == 'author':
                     value = value.split(' and ')
@@ -262,10 +262,10 @@ class BibTeX(dict):
         """Pretty print in bibtex format."""
         bibstring = ''
 
-        for k, v in self.iteritems():
+        for k, v in self.items():
             bibstring += '@' + v[0] + ' { ' + k
 
-            for ek, ev in v[1].iteritems():
+            for ek, ev in v[1].items():
                 if ek.lower() == 'author':
                     ev = ' and '.join(ev)
                 if ek.lower() == 'pages':
@@ -286,14 +286,14 @@ class BibTeX(dict):
 def bib2rst_references(bib):
     """Compose the reference page."""
     # do it in unicode
-    rst = u''
+    rst = ''
     intro = open('doc/misc/references.in').readlines()
     rst += intro[0]
     rst += "  #\n  # THIS IS A GENERATED FILE -- DO NOT EDIT!\n  #\n"
     rst += ''.join(intro[1:])
     rst += '\n\n'
 
-    biblist = bib.items()
+    biblist = list(bib.items())
     biblist.sort(compare_bib_by_author)
 
     for id, (cat, prop) in biblist:
@@ -301,10 +301,10 @@ def bib2rst_references(bib):
         rst += '.. _' + id + ':\n\n'
 
         # compose the citation as the list item label
-        cit = u''
+        cit = ''
         # initial details equal for all item types
         if 'author' in prop:
-            cit += u'**' + join_author_list(prop['author']) + u'**'
+            cit += '**' + join_author_list(prop['author']) + '**'
         if 'year' in prop:
             cit += ' (' + prop['year'] + ').'
         if 'title' in prop:
@@ -331,7 +331,7 @@ def bib2rst_references(bib):
             if 'pages' in prop:
                 cit += ', ' + '-'.join(prop['pages'])
         else:
-            print "WARNING: Cannot handle bibtex item type:", cat
+            print("WARNING: Cannot handle bibtex item type:", cat)
 
         cit += '.'
 

@@ -323,9 +323,9 @@ for i, sm_t in enumerate((
     pl.colorbar(shrink=.4, ticks=[-1, 0, 1])
     pl.title(title, size=12)
     ylim = pl.ylim()
-    pl.xticks(range(ncats), labels, size='small', stretch='ultra-condensed',
+    pl.xticks(list(range(ncats)), labels, size='small', stretch='ultra-condensed',
               rotation=45)
-    pl.yticks(range(ncats), labels, size='small', stretch='ultra-condensed',
+    pl.yticks(list(range(ncats)), labels, size='small', stretch='ultra-condensed',
               rotation=45)
     pl.ylim(ylim)
 

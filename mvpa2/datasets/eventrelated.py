@@ -143,9 +143,9 @@ def find_events(**kwargs):
     old_combo = None
     duration = 1
     # over all samples
-    for r in xrange(len(kwargs.values()[0])):
+    for r in range(len(list(kwargs.values())[0])):
         # current attribute combination
-        combo = dict([(k, v[r]) for k, v in kwargs.iteritems()])
+        combo = dict([(k, v[r]) for k, v in kwargs.items()])
 
         # check if things changed
         if not combo == old_combo:
@@ -496,7 +496,7 @@ def fit_event_hrf_model(
         from mvpa2.mappers.glm import NiPyGLMMapper
 
     # Decide/device condition attribute on which GLM will actually be done
-    if isinstance(condition_attr, basestring):
+    if isinstance(condition_attr, str):
         # must be a list/tuple/array for the logic below
         condition_attr = [condition_attr]
 
@@ -554,7 +554,7 @@ def fit_event_hrf_model(
                 names.append(attr)
             else:
                 #  add one per each column of the regressor
-                for i in xrange(regr.shape[1]):
+                for i in range(regr.shape[1]):
                     names.append("%s.%d" % (attr, i))
             regrs.append(regr)
         regrs = np.hstack(regrs)
@@ -589,7 +589,7 @@ def fit_event_hrf_model(
     # some regressors might be corresponding not to original condition_attr
     # so let's separate them out
     regressor_names = model_params.sa[glm_condition_attr].value
-    condition_regressors = np.array([v in glm_condition_attr_map.values()[0]
+    condition_regressors = np.array([v in list(glm_condition_attr_map.values())[0]
                                      for v in regressor_names])
     assert(condition_regressors.dtype == np.bool)
     if not np.all(condition_regressors):
@@ -601,7 +601,7 @@ def fit_event_hrf_model(
         regressor_names = model_params.sa[glm_condition_attr].value
 
     # now define proper condition sa's
-    for con, con_map in glm_condition_attr_map.iteritems():
+    for con, con_map in glm_condition_attr_map.items():
         model_params.sa[con] = [con_map[v] for v in regressor_names]
     model_params.sa.pop(glm_condition_attr) # remove generated one
     return model_params

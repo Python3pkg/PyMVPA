@@ -9,7 +9,7 @@ conds = {int(d['cond'][-1]): d['name']
 
 for run in range(1, 13):
     evs = []
-    for c in conds.keys():
+    for c in list(conds.keys()):
         onsets = [l.split()[:2]
                   for l in open('mvpa2/data/haxby2001/sub001/model/model001/onsets/task001_run%.3i/cond%.3i.txt' % (run, c))]
         for o in onsets:

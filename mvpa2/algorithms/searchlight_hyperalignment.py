@@ -193,10 +193,10 @@ class FeatureSelectionHyperalignment(ClassWithCollections):
             elif bigger_ds_idxs:
                 for selected_features, isub in zip(features_selected, bigger_ds_idxs):
                     mapper_full = np.zeros((nfeatures_all[isub], nfeatures_all[ref_ds]))
-                    mapper_full[np.ix_(selected_features, range(nfeatures))] = mappers[isub]
+                    mapper_full[np.ix_(selected_features, list(range(nfeatures)))] = mappers[isub]
                     mappers[isub] = mapper_full
         except LinAlgError:
-            print "SVD didn't converge. Try with a new reference, may be."
+            print("SVD didn't converge. Try with a new reference, may be.")
             mappers = [np.eye(nfeatures, dtype='int')] * len(datasets)
         # Extract only the row/column corresponding to the center voxel if full_matrix is False
         if not self.full_matrix:

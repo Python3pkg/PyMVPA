@@ -13,4 +13,4 @@ if __name__ == '__main__':
     #                                    '\\.externals$']
     docwriter.write_api_docs(outdir)
     #docwriter.write_index(outdir, 'gen', relative_to='api')
-    print '%d files written' % len(docwriter.written_modules)
+    print('%d files written' % len(docwriter.written_modules))

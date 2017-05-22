@@ -39,7 +39,7 @@ for kernel_class, kernel_args in (
     (RationalQuadraticKernel, {}),
     ):
     kernel = kernel_class(**kernel_args)
-    print kernel
+    print(kernel)
     result = kernel.compute(data)
 
 # In the following we draw some 2D functions at random from the
@@ -49,7 +49,7 @@ for kernel_class, kernel_args in (
 # of a kernel defines a prior probability over the function space
 # used for regression/classfication with GPR/GPC.
 count = 1
-for k in kernel_dictionary.keys():
+for k in list(kernel_dictionary.keys()):
     pl.subplot(3, 4, count)
     # X = np.random.rand(size)*12.0-6.0
     # X.sort()
@@ -57,7 +57,7 @@ for k in kernel_dictionary.keys():
     X = X[:, np.newaxis]
     ker = kernel_dictionary[k]()
     ker.compute(X, X)
-    print k
+    print(k)
     K = np.asarray(ker)
     for i in range(10):
         f = np.random.multivariate_normal(np.zeros(X.shape[0]), K)

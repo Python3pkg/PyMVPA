@@ -54,11 +54,11 @@ def main():
         ]:
         # XXX put back whenever there is summary() again
         #print "%s\n %s" % (datasetdescr, dataset.summary(idhash=False))
-        print " Classifier on %s\n" \
+        print(" Classifier on %s\n" \
                 "                                          :   %%corr   " \
-                "#features\t train  predict full" % datasetdescr
+                "#features\t train  predict full" % datasetdescr)
         for clf in clfs_:
-            print "  %-40s: "  % clf.descr,
+            print("  %-40s: "  % clf.descr, end=' ')
             # Let's prevent failures of the entire script if some particular
             # classifier is not appropriate for the data
             try:
@@ -71,8 +71,8 @@ def main():
                         clf, NFoldPartitioner(), enable_ca=['stats', 'calling_time'])
                     error = cv(dataset)
                     # print cv.ca.stats
-                    print "%5.1f%%      -    \t   -       -    %.2fs" \
-                          % (cv.ca.stats.percent_correct, cv.ca.calling_time)
+                    print("%5.1f%%      -    \t   -       -    %.2fs" \
+                          % (cv.ca.stats.percent_correct, cv.ca.calling_time))
                     continue
 
                 # To report transfer error (and possibly some other metrics)
@@ -96,11 +96,11 @@ def main():
                 #TODO nf = np.mean(nf)
                 # print confusion
                 #TODO print "%5.1f%%   %-4d\t %.2fs  %.2fs   %.2fs" % \
-                print "%5.1f%%       -   \t %.2fs  %.2fs   %.2fs" % \
-                      (confusion.percent_correct, times[0], times[1], tfull)
+                print("%5.1f%%       -   \t %.2fs  %.2fs   %.2fs" % \
+                      (confusion.percent_correct, times[0], times[1], tfull))
                 #TODO      (confusion.percent_correct, nf, times[0], times[1], tfull)
-            except LearnerError, e:
-                print " skipped due to '%s'" % e
+            except LearnerError as e:
+                print(" skipped due to '%s'" % e)
 
 if __name__ == "__main__":
     main()

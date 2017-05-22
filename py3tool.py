@@ -104,13 +104,13 @@ def sync_2to3(src, dst, clean=False):
     flag_sets = {}
     for fn, dst_fn in to_convert:
         flag = ''
-        for pat, opt in EXTRA_2TO3_FLAGS.items():
+        for pat, opt in list(EXTRA_2TO3_FLAGS.items()):
             if fnmatch.fnmatch(fn, pat):
                 flag = opt
                 break
         flag_sets.setdefault(flag, []).append(dst_fn)
 
-    for flags, filenames in flag_sets.items():
+    for flags, filenames in list(flag_sets.items()):
         if flags == 'skip':
             continue
 

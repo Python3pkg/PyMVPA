@@ -234,7 +234,7 @@ class IOHelperTests(unittest.TestCase):
         chunks_sorted = np.sort(chunks)
         self.assertTrue((chunks == chunks_sorted).all())
         # for this specific one we must have just 4 chunks
-        self.assertTrue((np.unique(chunks) == range(4)).all())
+        self.assertTrue((np.unique(chunks) == list(range(4))).all())
 
 
     def test_sensor_locations(self):
@@ -283,6 +283,6 @@ def suite():  # pragma: no cover
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()
 

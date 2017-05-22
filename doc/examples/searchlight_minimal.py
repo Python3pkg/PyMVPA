@@ -55,7 +55,7 @@ sl = sphere_searchlight(cv, radius=2, space='myspace',
 # run searchlight on dataset
 sl_map = sl(dataset)
 
-print 'Best performing sphere error:', np.min(sl_map.samples)
+print('Best performing sphere error:', np.min(sl_map.samples))
 
 """
 If this analysis is done on a fMRI dataset using `NiftiDataset` the resulting

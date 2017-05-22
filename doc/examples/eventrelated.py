@@ -150,7 +150,7 @@ performs excellent.
 
 """
 
-print sclf.ca.stats
+print(sclf.ca.stats)
 
 """
 

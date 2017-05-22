@@ -118,8 +118,8 @@ def autosummary_table_visit_html(self, node):
             par = col1_entry[0]
             for j, subnode in enumerate(list(par)):
                 if isinstance(subnode, nodes.Text):
-                    new_text = unicode(subnode.astext())
-                    new_text = new_text.replace(u" ", u"\u00a0")
+                    new_text = str(subnode.astext())
+                    new_text = new_text.replace(" ", "\u00a0")
                     par[j] = nodes.Text(new_text)
     except IndexError:
         pass
@@ -158,7 +158,7 @@ def get_documenter(obj, parent):
         parent_doc = parent_doc_cls(FakeDirective(), "")
 
     # Get the corrent documenter class for *obj*
-    classes = [cls for cls in AutoDirective._registry.values()
+    classes = [cls for cls in list(AutoDirective._registry.values())
                if cls.can_document_member(obj, '', False, parent_doc)]
     if classes:
         classes.sort(key=lambda cls: cls.priority)
@@ -275,7 +275,7 @@ class Autosummary(Directive):
                 # parse right now, to get PycodeErrors on parsing (results will
                 # be cached anyway)
                 documenter.analyzer.find_attr_docs()
-            except PycodeError, err:
+            except PycodeError as err:
                 documenter.env.app.debug(
                     '[autodoc] module analyzer failed: %s', err)
                 # no source file -- e.g. for builtin and C modules
@@ -397,7 +397,7 @@ def mangle_signature(sig, max_chars=30):
             sig += "[, %s]" % limited_join(", ", opts,
                                            max_chars=max_chars-len(sig)-4-2)
 
-    return u"(%s)" % sig
+    return "(%s)" % sig
 
 def limited_join(sep, items, max_chars=30, overflow_marker="..."):
     """Join a number of strings to one, limiting the length to *max_chars*.
@@ -479,7 +479,7 @@ def _import_by_name(name):
         # ... then as MODNAME, MODNAME.OBJ1, MODNAME.OBJ1.OBJ2, ...
         last_j = 0
         modname = None
-        for j in reversed(range(1, len(name_parts)+1)):
+        for j in reversed(list(range(1, len(name_parts)+1))):
             last_j = j
             modname = '.'.join(name_parts[:j])
             try:
@@ -498,7 +498,7 @@ def _import_by_name(name):
             return obj, parent, modname
         else:
             return sys.modules[modname], None, modname
-    except (ValueError, ImportError, AttributeError, KeyError), e:
+    except (ValueError, ImportError, AttributeError, KeyError) as e:
         raise ImportError(*e.args)
 
 

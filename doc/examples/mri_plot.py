@@ -84,7 +84,7 @@ a subset of slices to be plotted. That's it.
 
 
 fig = plot_lightbox(overlay=map2nifti(dataset, sens),
-              vlim=(0, None), slices=range(25,29), **mri_args)
+              vlim=(0, None), slices=list(range(25,29)), **mri_args)
 
 """
 The resulting figure would look like this:

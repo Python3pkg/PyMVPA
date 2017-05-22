@@ -103,7 +103,7 @@ for i, method in enumerate(methods):
     """
 
     t1 = time()
-    print("%s: %.2g sec" % (methods[i], t1 - t0))
+    print(("%s: %.2g sec" % (methods[i], t1 - t0)))
 
     ax = fig.add_subplot(242 + i)
     pl.scatter(Y[:, 0], Y[:, 1], c=ds.targets, cmap=pl.cm.Spectral)
@@ -119,7 +119,7 @@ iso = SKLTransformer(manifold.Isomap(n_neighbors=10, n_components=2))
 # call the SKLTransformer instance on the input dataset
 Y = iso(ds)
 t1 = time()
-print("Isomap: %.2g sec" % (t1 - t0))
+print(("Isomap: %.2g sec" % (t1 - t0)))
 ax = fig.add_subplot(246)
 pl.scatter(Y[:, 0], Y[:, 1], c=ds.targets, cmap=pl.cm.Spectral)
 pl.title("Isomap (%.2g sec)" % (t1 - t0))
@@ -136,7 +136,7 @@ mds = SKLTransformer(manifold.MDS(n_components=2, max_iter=100,
 # call the SKLTransformer instance on the input dataset
 Y = mds(ds)
 t1 = time()
-print("MDS: %.2g sec" % (t1 - t0))
+print(("MDS: %.2g sec" % (t1 - t0)))
 ax = fig.add_subplot(247)
 pl.scatter(Y[:, 0], Y[:, 1], c=ds.targets, cmap=pl.cm.Spectral)
 pl.title("MDS (%.2g sec)" % (t1 - t0))
@@ -153,7 +153,7 @@ se = SKLTransformer(manifold.SpectralEmbedding(n_components=n_components,
 # call the SKLTransformer instance on the input dataset
 Y = se(ds)
 t1 = time()
-print("SpectralEmbedding: %.2g sec" % (t1 - t0))
+print(("SpectralEmbedding: %.2g sec" % (t1 - t0)))
 ax = fig.add_subplot(248)
 pl.scatter(Y[:, 0], Y[:, 1], c=ds.targets, cmap=pl.cm.Spectral)
 pl.title("SpectralEmbedding (%.2g sec)" % (t1 - t0))

@@ -140,7 +140,7 @@ class Balancer(Node):
                 for k in epa:
                     epa[k] = int(round(epa[k] * amount))
             elif isinstance(amount, int):
-                epa = dict(zip(uattr_limited, [amount] * len(uattr_limited)))
+                epa = dict(list(zip(uattr_limited, [amount] * len(uattr_limited))))
             else:
                 raise ValueError("Unknown type of amount argument '%s'" % amount)
 
@@ -197,7 +197,7 @@ class Balancer(Node):
         # figure out filter for all runs at once
         # permute as often as requested, reusing the same kwargs
         kwargs = self._get_call_kwargs(ds)
-        for i in xrange(self.count):
+        for i in range(self.count):
             yield self(ds, _call_kwargs=kwargs)
 
     def __str__(self):

@@ -23,7 +23,7 @@ def test_splitclf_sensitivities():
                                        nfeatures=4,
                                        nonbogus_features=[0, i + 1],
                                        snr=1, nchunks=2)
-                for i in xrange(2)]
+                for i in range(2)]
 
     sclf = SplitClassifier(SMLR(),
                            NFoldPartitioner())
@@ -50,5 +50,5 @@ def test_splitclf_sensitivities():
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()

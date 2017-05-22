@@ -108,7 +108,7 @@ class KernelTests(unittest.TestCase):
 
     def test_linear_kernel(self):
         """Simplistic testing of linear kernel"""
-        d1 = Dataset(np.asarray([range(5)] * 10, dtype=float))
+        d1 = Dataset(np.asarray([list(range(5))] * 10, dtype=float))
         lk = npK.LinearKernel()
         lk.compute(d1)
         self.assertTrue(lk._k.shape == (10, 10),
@@ -350,6 +350,6 @@ def suite():  # pragma: no cover
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()
 

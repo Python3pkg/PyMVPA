@@ -172,7 +172,7 @@ def test_dataset_without_chunks():
     ok_(ds_loaded.a.custom == ds.a.custom)
 
 def test_recursion():
-    obj = range(2)
+    obj = list(range(2))
     obj.append(HDFDemo())
     obj.append(obj)
     f = tempfile.NamedTemporaryFile()
@@ -307,8 +307,8 @@ if hasattr(collections, 'namedtuple') and sys.version_info > (2, 7, 4):
 if hasattr(collections, 'OrderedDict'):
     _python_objs.extend([collections.OrderedDict(a=1, b=2)])
 
-_unicode_arrays = [np.array([['a', u'мама', 'x'],
-                             [u"ы", 'a', 'z']], order=o)
+_unicode_arrays = [np.array([['a', 'мама', 'x'],
+                             ["ы", 'a', 'z']], order=o)
                    for o in 'CF']
 
 # non-record (simple) numpy arrays
@@ -318,7 +318,7 @@ _numpy_objs = [
     np.arange(6).reshape((2, 3), order='F'),
     np.array(list('abcdef')),
     np.array("string"),
-    np.array(u"ы"),
+    np.array("ы"),
   ] \
   + _unicode_arrays \
   + [a[:, ::2] for a in _unicode_arrays]
@@ -327,7 +327,7 @@ _numpy_objs = [
 _numpy_objs += [
     np.array([(1.0, 2), (3.0, 4)], dtype=[('x', float), ('y', int)]),
     np.array([(1.0, 'a'), (3.0, 'b')], dtype=[('x', float), ('y', 'S1')]),
-    np.array([(1.0, u'ы'), (3.0, 'b')], dtype=[('x', float), ('y', '<U1')]),
+    np.array([(1.0, 'ы'), (3.0, 'b')], dtype=[('x', float), ('y', '<U1')]),
 ]
 
 @sweepargs(obj=_python_objs + _numpy_objs)
@@ -365,11 +365,11 @@ def saveload(obj, f, backend='hdf5'):
         obj_ = h5load(f)
     else:
         #check pickle -- does it correctly
-        import cPickle
+        import pickle
         with open(f, 'w') as f_:
-            cPickle.dump(obj, f_)
+            pickle.dump(obj, f_)
         with open(f) as f_:
-            obj_ = cPickle.load(f_)
+            obj_ = pickle.load(f_)
     return obj_
 
 # Test some nasty nested constructs of mutable beasts

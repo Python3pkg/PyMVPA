@@ -9,7 +9,7 @@
 """Fixer for rdist in scipy
 """
 # For scipy import
-from __future__ import absolute_import
+
 
 __docformat__ = 'restructuredtext'
 
@@ -108,7 +108,7 @@ if not externals.exists('good scipy.stats.rv_discrete.ppf'):
         """
         loc = kwds.get('loc')
         args, loc = self._rv_discrete__fix_loc(args, loc)
-        q,loc  = map(arr,(q,loc))
+        q,loc  = list(map(arr,(q,loc)))
         args = tuple(map(arr,args))
         cond0 = self._argcheck(*args) & (loc == loc)
         cond1 = (q > 0) & (q < 1)
@@ -148,7 +148,7 @@ if externals.versions['scipy'] >= '0.8.0' and \
         args = list(args)
         Nargs = len(args)
         fixedn = []
-        index = range(Nargs)
+        index = list(range(Nargs))
         names = ['f%d' % n for n in range(Nargs - 2)] + ['floc', 'fscale']
         x0 = []
         for n, key in zip(index, names):

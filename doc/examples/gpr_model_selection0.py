@@ -31,7 +31,7 @@ F = 1
 dataset = data_generators.sin_modulated(train_size, F)
 dataset_test = data_generators.sin_modulated(test_size, F, flat=True)
 
-print "Looking for better hyperparameters: grid search"
+print("Looking for better hyperparameters: grid search")
 
 # definition of the search grid:
 sigma_noise_steps = np.linspace(0.1, 0.5, num=20)
@@ -77,11 +77,11 @@ pl.xlabel("noise standard deviation")
 pl.ylabel("characteristic length_scale")
 pl.title("log marginal likelihood")
 pl.axis("tight")
-print "lml_best", lml_best
-print "sigma_noise_best", sigma_noise_best
-print "length_scale_best", length_scale_best
-print "number of expected upcrossing on the unitary intervale:", \
-      1.0/(2*np.pi*length_scale_best)
+print("lml_best", lml_best)
+print("sigma_noise_best", sigma_noise_best)
+print("length_scale_best", length_scale_best)
+print("number of expected upcrossing on the unitary intervale:", \
+      1.0/(2*np.pi*length_scale_best))
 
 
 # TODO: reincarnate by providing a function within gpr.py

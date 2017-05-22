@@ -77,7 +77,7 @@ for sig in sigs:
 
     msg = "SIGNAL: %.2f training_error: %.2f error: %.2f |w|: %.2f r=%.2f" \
       %(sig, training_error, error, np.linalg.norm(w), r)
-    print msg
+    print(msg)
 
     # Drawing current data and SVM hyperplane+margin
     xmin = np.min(ds[:,0], axis=0)

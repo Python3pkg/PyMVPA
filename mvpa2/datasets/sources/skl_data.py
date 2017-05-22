@@ -92,6 +92,6 @@ def %s(%s):
                fx.__name__,
                fx.__name__,
                ', '.join(argnames))
-        exec fxdef
+        exec(fxdef)
         __all__.append(pymvpa_fxname)
 

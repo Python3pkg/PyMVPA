@@ -71,7 +71,7 @@ class DigitsIterator:
     def __iter__(self):
         frac = 10
         ll = len(self.targets)
-        for i in xrange(frac):
+        for i in range(frac):
             yield self.digits[i*ll/frac:(i+1)*ll/frac], \
                   self.targets[i*ll/frac:(i+1)*ll/frac]
 
@@ -102,7 +102,7 @@ prediction error is computed.
 feature_space = fdaclf[:-1](testdata)
 guess = fdaclf[-1].label(feature_space)
 err = 1 - np.mean(guess == testlabels)
-print 'Test error:', err
+print('Test error:', err)
 
 """
 
@@ -175,7 +175,7 @@ tm = TransferMeasure(MappedClassifier(SMLR(), mapper),
                      Splitter('chunks', attr_values=['train', 'test']),
                      enable_ca=['stats', 'samples_error'])
 tm(ds)
-print 'Test error:', 1 - tm.ca.stats.stats['ACC']
+print('Test error:', 1 - tm.ca.stats.stats['ACC'])
 
 """
 Visualizing data and results
@@ -221,7 +221,7 @@ if externals.exists('matplotlib') \
     colors = ('r','g','b','k','c','m','y','burlywood','chartreuse','gray')
     clouds = []
     for i, p in enumerate(pts):
-        print i
+        print(i)
         clouds.append(ax.plot(p[:, 0], p[:, 1], p[:, 2], 'o', c=colors[i],
                               label=str(i), alpha=0.6))
 

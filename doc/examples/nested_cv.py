@@ -83,7 +83,7 @@ def select_best_clf(dataset_, clfs):
         # cv.transerror.clf = clf
         try:
             error = np.mean(cv(dataset_))
-        except LearnerError, e:
+        except LearnerError as e:
             # skip the classifier if data was not appropriate and it
             # failed to learn/predict at all
             continue
@@ -129,17 +129,17 @@ once
 verbose(1, "Estimating error via fishing expedition (best clf on entire dataset)")
 cheating_clf, cheating_error = select_best_clf(dataset, clfswh['!gnpp'])
 
-print """Errors:
+print("""Errors:
  sample classifier (kNN): %.2f
  model selection within cross-validation: %.2f
  model selection via fishing expedition: %.2f with %s
  """ % (error_sample, 1 - confusion.stats['ACC'],
-        cheating_error, cheating_clf.descr)
+        cheating_error, cheating_clf.descr))
 
-print "# of times following classifiers were selected within " \
-      "nested cross-validation:"
-for c, count in sorted(best_clfs.items(), key=lambda x:x[1], reverse=True):
-    print " %i times %s" % (count, c)
+print("# of times following classifiers were selected within " \
+      "nested cross-validation:")
+for c, count in sorted(list(best_clfs.items()), key=lambda x:x[1], reverse=True):
+    print(" %i times %s" % (count, c))
 
-print "\nConfusion table for the nested cross-validation results:"
-print confusion
+print("\nConfusion table for the nested cross-validation results:")
+print(confusion)

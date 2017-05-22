@@ -83,7 +83,7 @@ for i in range(rows*columns):
     g = GPR(kse, sigma_noise=sigma_noise)
     if not regression:
         g = RegressionAsClassifier(g)
-    print g
+    print(g)
 
     if regression:
         g.ca.enable("predicted_variances")
@@ -104,11 +104,11 @@ for i in range(rows*columns):
     accuracy = None
     if regression:
         accuracy = np.sqrt(((prediction-label_test)**2).sum()/prediction.size)
-        print "RMSE:", accuracy
+        print("RMSE:", accuracy)
     else:
         accuracy = (prediction.astype('l')==label_test.astype('l')).sum() \
                    / float(prediction.size)
-        print "accuracy:", accuracy
+        print("accuracy:", accuracy)
 
     """
     The remaining code simply plots both training and test datasets, as
@@ -133,7 +133,7 @@ for i in range(rows*columns):
 
         pl.legend(loc='lower right')
 
-    print "LML:", g.ca.log_marginal_likelihood
+    print("LML:", g.ca.log_marginal_likelihood)
 
 
 if cfg.getboolean('examples', 'interactive', True):

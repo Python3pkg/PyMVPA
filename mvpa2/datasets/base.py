@@ -282,7 +282,7 @@ class Dataset(AttrDataset):
             # We cannot count on the order the values in the dict will show up
             # with `self._data.value()` and since idhash will be order-dependent
             # we have to make it deterministic
-            keys = col.keys()
+            keys = list(col.keys())
             keys.sort()
             for k in keys:
                 res += ' %s@%s' % (k, idhash_(col[k].value))

@@ -89,12 +89,12 @@ error_plain = np.mean(cv_plain(dataset))
 t_plain = time() - t0
 
 # UC: unique chunks, UT: unique targets
-print "Results for %i-fold cross-validation on %i-class problem:" \
-      % (len(dataset.UC), len(dataset.UT))
-print " plain kernel:  error=%.3f computed in %.2f sec" \
-      % (error_plain, t_plain)
-print " cached kernel: error=%.3f computed in %.2f sec (cached in %.2f sec)" \
-      % (error, t_cached, t_caching)
+print("Results for %i-fold cross-validation on %i-class problem:" \
+      % (len(dataset.UC), len(dataset.UT)))
+print(" plain kernel:  error=%.3f computed in %.2f sec" \
+      % (error_plain, t_plain))
+print(" cached kernel: error=%.3f computed in %.2f sec (cached in %.2f sec)" \
+      % (error, t_cached, t_caching))
 
 """The following is output from running this example::
 

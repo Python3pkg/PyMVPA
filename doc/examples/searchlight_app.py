@@ -93,7 +93,7 @@ def main():
     elif options.clf == 'rbf_nu_svmc':
         clf = RbfNuSVMC(nu=options.svm_nu)
     else:
-        raise ValueError, 'Unknown classifier type: %s' % `options.clf`
+        raise ValueError('Unknown classifier type: %s' % repr(options.clf))
     verbose(3, "Using '%s' classifier" % options.clf)
 
     verbose(1, "Computing")
@@ -119,7 +119,7 @@ def main():
         # save to file
         rimg.save(ofile)
     else:
-        print results
+        print(results)
 
 if __name__ == "__main__":
     main()

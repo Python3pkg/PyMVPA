@@ -17,8 +17,8 @@ import numpy as np
 import mvpa2
 
 # To troubleshoot buildbot documentation build problem
-print "D: PyMVPA path %s" % mvpa2.__path__
-print "D: PYTHONPATHs", '\n   '.join([]+sys.path)
+print("D: PyMVPA path %s" % mvpa2.__path__)
+print("D: PYTHONPATHs", '\n   '.join([]+sys.path))
 
 # We need to know sphinx version for decisions below
 import sphinx
@@ -322,17 +322,17 @@ def update_intersphinx_mapping(mapping):
             intersphinx_mapping[url] = f
 
 def fetch_intersphinx_objects(mapping):
-    import urllib
+    import urllib.request, urllib.parse, urllib.error
     if not os.path.exists(intersphinx_dir):
         os.makedirs(intersphinx_dir)
     for url in mapping:
         objects_url = '%s/objects.inv' % url
         try:
             f = get_intersphinx_file(url)
-            urllib.urlretrieve(objects_url, f)
-            print("D: fetched %s" % f)
-        except Exception, e:
-            print("D: failed to retrieve from %s: %s" % (objects_url, e))
+            urllib.request.urlretrieve(objects_url, f)
+            print(("D: fetched %s" % f))
+        except Exception as e:
+            print(("D: failed to retrieve from %s: %s" % (objects_url, e)))
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
@@ -342,4 +342,4 @@ if __name__ == '__main__':
 if os.path.exists(intersphinx_dir):
     update_intersphinx_mapping(intersphinx_mapping)
 
-print("D: interersphinx_mapping %s " % (str(intersphinx_mapping)))
+print(("D: interersphinx_mapping %s " % (str(intersphinx_mapping))))

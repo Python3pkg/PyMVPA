@@ -96,18 +96,18 @@ and queries each classifier to finally generate a nice plot showing
 the decision surface of each individual classifier, both for the linear and
 the non-linear dataset."""
 
-for id, ds in datasets.iteritems():
+for id, ds in datasets.items():
     # loop over classifiers and show how they do
     fig = 0
 
     # make a new figure
     pl.figure(figsize=(nx*4, ny*4))
 
-    print "Processing %s problem..." % id
+    print("Processing %s problem..." % id)
 
     for c in sorted(clfs):
         # tell which one we are doing
-        print "Running %s classifier..." % (c)
+        print("Running %s classifier..." % (c))
 
         # make a new subplot for each classifier
         fig += 1
@@ -132,7 +132,7 @@ for id, ds in datasets.iteritems():
         elif 'Nearest-Ne' in c:
             # Use the dictionaries with votes
             res = np.array([e[l1] for e in clf.ca.estimates]) \
-                  / np.sum([e.values() for e in clf.ca.estimates], axis=1)
+                  / np.sum([list(e.values()) for e in clf.ca.estimates], axis=1)
         elif c == 'Logistic Regression':
             # get out the values used for the prediction
             res = np.asarray(clf.ca.estimates)

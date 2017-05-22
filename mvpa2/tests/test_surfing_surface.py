@@ -72,11 +72,11 @@ class SurfingSurfaceTests(unittest.TestCase):
         SurfingSurfaceTests._assert_rotation_maps_vector(r, x, y)
 
     def test_vector_alignment_find_rotation_canonical_vectors(self):
-        for i in xrange(3):
+        for i in range(3):
             x = np.zeros((3,))
             x[i] = 1
 
-            for j in xrange(3):
+            for j in range(3):
                 y = np.zeros((3,))
                 y[j] = 1
 
@@ -173,7 +173,7 @@ class SurfingSurfaceTests(unittest.TestCase):
 
         # compute some pairwise distances between nodes, and verity these
         # are more or lress the same in p_xyz and q_xyz
-        for _ in xrange(n_pairs_to_test):
+        for _ in range(n_pairs_to_test):
             a = get_random_int()
             b = get_random_int()
 
@@ -280,7 +280,7 @@ class SurfingSurfaceTests(unittest.TestCase):
         expected_img_rgb = np.zeros((plane.nvertices, 3))
 
         # store expected and found RGB values
-        for i, (x, y) in enumerate(zip(*(xs, ys))):
+        for i, (x, y) in enumerate(list(zip(*(xs, ys)))):
             img_rgb[i] = img_arr[y, x, :3]
             expected_img_rgb[i] = expected_img_arr[i, :3]
 
@@ -320,7 +320,7 @@ class SurfingSurfaceTests(unittest.TestCase):
                      as_sorted_sets(expected_pths), )
 
     def test_average_node_edge_length(self):
-        for side in xrange(1, 5):
+        for side in range(1, 5):
             s_flat = surf.generate_plane((0, 0, 0), (0, 0, 1), (0, 1, 0), 6, 6)
             rnd_xyz = 0 * np.random.normal(size=s_flat.vertices.shape)
             s = surf.Surface(s_flat.vertices + rnd_xyz, s_flat.faces)
@@ -335,11 +335,11 @@ class SurfingSurfaceTests(unittest.TestCase):
                 t = vertices[trg, :]
 
                 delta = s - t
-                print s, t, delta
+                print(s, t, delta)
                 return np.sum(delta ** 2) ** .5
 
             for i_face in s.faces:
-                for i in xrange(3):
+                for i in range(3):
                     src = i_face[i]
                     trg = i_face[(i + 1) % 3]
 
@@ -348,7 +348,7 @@ class SurfingSurfaceTests(unittest.TestCase):
                     c[src] += 1
                     c[trg] += 1
 
-                    print i, src, trg, d(src, trg)
+                    print(i, src, trg, d(src, trg))
 
             assert_array_almost_equal(sd / c, s.average_node_edge_length)
 

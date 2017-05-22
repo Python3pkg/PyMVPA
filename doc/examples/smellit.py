@@ -30,7 +30,7 @@ that there is balance among targets/chunks, and that order is balanced (where
 appropriate).
 """
 
-print ds.summary()
+print(ds.summary())
 
 """
 Now we can take a look at the distribution of the feature values in all
@@ -62,9 +62,9 @@ plot_samples_distance(ds, sortbyattr='targets')
 pl.title('Sample distances (sorted by targets)')
 
 # z-score features individually per chunk
-print 'Detrending data'
+print('Detrending data')
 poly_detrend(ds, polyord=2, chunks_attr='chunks')
-print 'Z-Scoring data'
+print('Z-Scoring data')
 zscore(ds)
 
 pl.figure(figsize=(14, 6))

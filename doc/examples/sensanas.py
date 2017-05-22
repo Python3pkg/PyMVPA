@@ -24,7 +24,7 @@ from mvpa2.suite import *
 
 # load PyMVPA example dataset with literal labels
 dataset = load_example_fmri_dataset(literal=True)
-print dataset.a
+print(dataset.a)
 
 """As with classifiers it is easy to define a bunch of sensitivity
 analyzers. It is usually possible to simply call `get_sensitivity_analyzer()`
@@ -86,12 +86,12 @@ dataspace of the original fMRI samples, which are then plotted."""
 fig = 0
 pl.figure(figsize=(14, 8))
 
-keys = sensanas.keys()
+keys = list(sensanas.keys())
 keys.sort()
 
 for s in keys:
     # tell which one we are doing
-    print "Running %s ..." % (s)
+    print("Running %s ..." % (s))
 
     sana = sensanas[s]
     # compute sensitivies

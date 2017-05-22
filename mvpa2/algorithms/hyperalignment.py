@@ -238,7 +238,7 @@ class Hyperalignment(ClassWithCollections):
                 samples = residuals,
                 sa = {'levels' :
                        ['1'] +
-                       ['2:%i' % i for i in xrange(params.level2_niter)]})
+                       ['2:%i' % i for i in range(params.level2_niter)]})
 
         if __debug__:
             debug('HPAL', "Hyperalignment %s for %i datasets"
@@ -251,9 +251,9 @@ class Hyperalignment(ClassWithCollections):
             # Making sure that ref_ds is within range.
             #Parameter() already checks for it being a non-negative integer
             if ref_ds >= ndatasets:
-                raise ValueError, "Requested reference dataset %i is out of " \
+                raise ValueError("Requested reference dataset %i is out of " \
                       "bounds. We have only %i datasets provided" \
-                      % (ref_ds, ndatasets)
+                      % (ref_ds, ndatasets))
         ca.chosen_ref_ds = ref_ds
         # zscore all data sets
         # ds = [ zscore(ds, chunks_attr=None) for ds in datasets]
@@ -272,7 +272,7 @@ class Hyperalignment(ClassWithCollections):
         if params.zscore_all:
             if __debug__:
                 debug('HPAL', "Z-scoring all datasets")
-            for ids in xrange(len(datasets)):
+            for ids in range(len(datasets)):
                 zmapper = ZScoreMapper(chunks_attr=None)
                 zmapper.train(datasets[ids])
                 datasets[ids] = zmapper.forward(datasets[ids])
@@ -350,7 +350,7 @@ class Hyperalignment(ClassWithCollections):
             # so we can assemble a comprehensive mapper at the end
             # (together with procrustes)
             zmappers = []
-            for ids in xrange(len(datasets)):
+            for ids in range(len(datasets)):
                 zmapper = ZScoreMapper(chunks_attr=None)
                 zmappers.append(zmapper)
                 zmapper.train(datasets[ids])
@@ -384,7 +384,7 @@ class Hyperalignment(ClassWithCollections):
             debug('HPAL', "Using regularized hyperalignment with alpha of %d"
                     % alpha)
         wmappers = []
-        for ids in xrange(len(datasets)):
+        for ids in range(len(datasets)):
             U, S, Vh = np.linalg.svd(datasets[ids])
             S = 1/np.sqrt( (1-alpha)*np.square(S) + alpha )
             S.resize(len(Vh))
@@ -400,7 +400,7 @@ class Hyperalignment(ClassWithCollections):
     def _level1(self, datasets, commonspace, ref_ds, mappers, residuals):
         params = self.params            # for quicker access ;)
         data_mapped = [ds.samples for ds in datasets]
-        for i, (m, ds_new) in enumerate(zip(mappers, datasets)):
+        for i, (m, ds_new) in enumerate(list(zip(mappers, datasets))):
             if __debug__:
                 debug('HPAL_', "Level 1: ds #%i" % i)
             if i == ref_ds:
@@ -449,10 +449,10 @@ class Hyperalignment(ClassWithCollections):
         #zscore(commonspace, chunks_attr=None)
 
         ndatasets = len(datasets)
-        for loop in xrange(params.level2_niter):
+        for loop in range(params.level2_niter):
             # 2nd-level alignment starts from the original/unprojected datasets
             # again
-            for i, (m, ds_new) in enumerate(zip(mappers, datasets)):
+            for i, (m, ds_new) in enumerate(list(zip(mappers, datasets))):
                 if __debug__:
                     debug('HPAL_', "Level 2 (%i-th iteration): ds #%i" % (loop, i))
 
@@ -515,7 +515,7 @@ class Hyperalignment(ClassWithCollections):
         # start from original input datasets again
         if params.nproc == 1:
             residuals = []
-            for i, (m, ds_new) in enumerate(zip(mappers, datasets)):
+            for i, (m, ds_new) in enumerate(list(zip(mappers, datasets))):
                 if __debug__:
                     debug('HPAL_', "Level 3: ds #%i" % i)
                 m, residual = get_trained_mapper(ds_new, self.commonspace, m,
@@ -555,7 +555,7 @@ class Hyperalignment(ClassWithCollections):
     def _map_and_mean(self, datasets, mappers):
         params = self.params
         data_mapped = [[] for ds in datasets]
-        for i, (m, ds_new) in enumerate(zip(mappers, datasets)):
+        for i, (m, ds_new) in enumerate(list(zip(mappers, datasets))):
             if __debug__:
                 debug('HPAL_', "Mapping training data for SVD: ds #%i" % i)
             ds_ = m.forward(ds_new.samples)

@@ -70,10 +70,10 @@ def main(argv=sys.argv):
                               template_dir=options.templates)
 
 def _simple_info(msg):
-    print msg
+    print(msg)
 
 def _simple_warn(msg):
-    print >> sys.stderr, 'WARNING: ' + msg
+    print('WARNING: ' + msg, file=sys.stderr)
 
 # -- Generating output ---------------------------------------------------------
 
@@ -110,7 +110,7 @@ def generate_autosummary_docs(sources, output_dir=None, suffix='.rst',
     items = find_autosummary_in_files(sources)
 
     # remove possible duplicates
-    items = dict([(item, True) for item in items]).keys()
+    items = list(dict([(item, True) for item in items]).keys())
 
     # keep track of new files
     new_files = []
@@ -127,7 +127,7 @@ def generate_autosummary_docs(sources, output_dir=None, suffix='.rst',
 
         try:
             name, obj, parent, mod_name = import_by_name(name)
-        except ImportError, e:
+        except ImportError as e:
             warn('[autosummary] failed to import %r: %s' % (name, e))
             continue
 
@@ -240,11 +240,11 @@ def find_autosummary_in_docstring(name, module=None, filename=None):
         return find_autosummary_in_lines(lines, module=name, filename=filename)
     except AttributeError:
         pass
-    except ImportError, e:
-        print "Failed to import '%s': %s" % (name, e)
-    except SystemExit, e:
-        print("Failed to import '%s'; the module executes module level "
-              "statement and it might call sys.exit()." % name)
+    except ImportError as e:
+        print("Failed to import '%s': %s" % (name, e))
+    except SystemExit as e:
+        print(("Failed to import '%s'; the module executes module level "
+              "statement and it might call sys.exit()." % name))
     return []
 
 def find_autosummary_in_lines(lines, module=None, filename=None):

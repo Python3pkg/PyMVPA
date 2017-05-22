@@ -67,7 +67,7 @@ def _img2data(src):
 
     # let's try whether we can get it done with nibabel
     import nibabel
-    if isinstance(src, basestring):
+    if isinstance(src, str):
         # filename
         img = nibabel.load(src)
     else:

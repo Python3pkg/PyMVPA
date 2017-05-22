@@ -304,7 +304,7 @@ if externals.exists('nibabel'):
     map2gifti(sl_dset, path_fn)
 
 
-print ("To view results in SUMA, cd to '%s', run 'suma -spec "
+print(("To view results in SUMA, cd to '%s', run 'suma -spec "
       "%sh_ico%d_al.spec', press ctrl+s, "
        "click on 'Load Dset', and select %s" %
-       (surfpath, hemi, lowres_ld, fn))
+       (surfpath, hemi, lowres_ld, fn)))

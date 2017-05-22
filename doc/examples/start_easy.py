@@ -59,5 +59,5 @@ The resulting dataset contains the computed accuracy.
 """
 
 # UC: unique chunks, UT: unique targets
-print "Error for %i-fold cross-validation on %i-class problem: %f" \
-      % (len(dataset.UC), len(dataset.UT), np.mean(error))
+print("Error for %i-fold cross-validation on %i-class problem: %f" \
+      % (len(dataset.UC), len(dataset.UT), np.mean(error)))

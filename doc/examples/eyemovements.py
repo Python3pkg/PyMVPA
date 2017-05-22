@@ -127,7 +127,7 @@ mclf = SplitClassifier(clf, space='orient',
                        enable_ca=['confusion'])
 sensana = mclf.get_sensitivity_analyzer()
 sens = sensana(fds)
-print mclf.ca.confusion
+print(mclf.ca.confusion)
 
 """
 The 8-fold cross-validation shows a trial-wise classification accuracy of

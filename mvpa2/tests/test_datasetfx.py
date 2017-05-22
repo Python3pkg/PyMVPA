@@ -72,7 +72,7 @@ class MiscDatasetFxTests(unittest.TestCase):
         self.assertTrue((chunks1 == np.asarray([0,0,0,0,1,1,1,1])).all())
 
         ds2 = dataset_wizard(samples=np.arange(len(chunks)).reshape(
-            (len(chunks),1)), targets=[1]*8, chunks=range(len(chunks)))
+            (len(chunks),1)), targets=[1]*8, chunks=list(range(len(chunks))))
         coarsen_chunks(ds2, nchunks=2)
         self.assertTrue((chunks1 == ds.chunks).all())
 
@@ -145,6 +145,6 @@ def suite():  # pragma: no cover
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()
 

@@ -47,7 +47,7 @@ from mvpa2.clfs.skl.base import SKLLearnerAdapter
 from mvpa2.datasets.sources.skl_data import skl_iris
 iris = skl_iris()
 # compact dataset summary
-print iris
+print(iris)
 
 """
 The original example uses only the first two features of the dataset, 

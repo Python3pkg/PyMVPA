@@ -24,7 +24,7 @@ class KNNTests(unittest.TestCase):
         uv_perf = []
 
         clf = kNN(k=10)
-        for i in xrange(20):
+        for i in range(20):
             train = pure_multivariate_signal( 20, 3 )
             test = pure_multivariate_signal( 20, 3 )
             clf.train(train)
@@ -68,6 +68,6 @@ def suite():  # pragma: no cover
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()
 

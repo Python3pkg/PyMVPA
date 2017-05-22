@@ -25,7 +25,7 @@ def test_erdataset():
     ntargets = 5
     blocklength = 5
     nfeatures = 2
-    targets = np.tile(np.repeat(range(ntargets), blocklength), nchunks)
+    targets = np.tile(np.repeat(list(range(ntargets)), blocklength), nchunks)
     chunks = np.repeat(np.arange(nchunks), ntargets * blocklength)
     samples = np.repeat(
                 np.arange(nchunks * ntargets * blocklength),

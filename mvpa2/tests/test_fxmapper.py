@@ -238,7 +238,7 @@ def test_fx_native_calls(f):
 
 def test_uniquemerge2literal():
     from mvpa2.mappers.fx import _uniquemerge2literal
-    assert_equal(_uniquemerge2literal(range(3)), ['0+1+2'])
+    assert_equal(_uniquemerge2literal(list(range(3))), ['0+1+2'])
     assert_equal(_uniquemerge2literal(
         np.arange(6).reshape(2, 3)), ['[0 1 2]+[3 4 5]'])
     assert_array_equal(_uniquemerge2literal([[2, 3, 4]]), [[2, 3, 4]])

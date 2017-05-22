@@ -43,13 +43,13 @@ datasets = [
    ]
 
 ndatasets = len(datasets)
-nmappers = len(mappers.keys())
+nmappers = len(list(mappers.keys()))
 
 pl.figure(figsize=(8,8))
 fig = 1
 
 for ds in datasets:
-    for mname, mapper in mappers.iteritems():
+    for mname, mapper in mappers.items():
         mapper.train(ds)
 
         dproj = mapper.forward(ds.samples)

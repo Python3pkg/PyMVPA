@@ -23,7 +23,7 @@ mappings = {':Parameters?:': 'Parameters',
 
 alltext = ''.join(open(fname).readlines())
 counts = {}
-for mn, mt in mappings.iteritems():
+for mn, mt in mappings.items():
     reparam = re.compile('(?P<spaces>\n *)(?P<header>'
                          + mn
                          + ')(?P<body>\n.*?(?:\n\s*\n|"""))',
@@ -40,7 +40,7 @@ for mn, mt in mappings.iteritems():
 
         # Lets adjust alltext
         body = resd['body']
-        for i in xrange(2):
+        for i in range(2):
             body = body.replace(resd['spaces'] + ' ', resd['spaces'])
         # if any 4-spaces survived
         # body = body.replace(resd['spaces'] + '    ', resd['spaces'] + '  ')
@@ -56,6 +56,6 @@ for mn, mt in mappings.iteritems():
         count += 1
     counts[mn] = count
 
-print "File %s: %s" % (
-    fname, ', '.join(['%s: %i' % i for i in counts.items() if i[1]]))
+print("File %s: %s" % (
+    fname, ', '.join(['%s: %i' % i for i in list(counts.items()) if i[1]])))
 file(fname, 'w').write(alltext)

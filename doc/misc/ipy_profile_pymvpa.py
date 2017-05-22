@@ -32,10 +32,10 @@ def main():
     # is no problem, though.
     #ip.ex('from mvpa2.suite import *')
 
-    print """
+    print("""
 ###########################
 # Welcome to PyMVPA %s #
 ###########################
-""" % mvpa2.__version__
+""" % mvpa2.__version__)
 
 main()

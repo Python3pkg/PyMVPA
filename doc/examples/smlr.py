@@ -24,7 +24,7 @@ if __debug__:
     debug.active.append('SMLR_')
 
 # features of sample data
-print "Generating samples..."
+print("Generating samples...")
 nfeat = 10000
 nsamp = 100
 ntrain = 90
@@ -49,7 +49,7 @@ patternsNeg = dataset_wizard(samples=samp2[ntrain:,:], targets=0)
 testpat = vstack((patternsPos, patternsNeg))
 
 # set up the SMLR classifier
-print "Evaluating SMLR classifier..."
+print("Evaluating SMLR classifier...")
 smlr = SMLR(fit_all_weights=True)
 
 # enable saving of the estimates used for the prediction
@@ -67,7 +67,7 @@ smlr_confusion = ConfusionMatrix(
     predictions=pre)
 
 # now do the same for a linear SVM
-print "Evaluating Linear SVM classifier..."
+print("Evaluating Linear SVM classifier...")
 lsvm = LinearNuSVMC(probability=1)
 
 # enable saving of the estimates used for the prediction
@@ -85,7 +85,7 @@ lsvm_confusion = ConfusionMatrix(
     predictions=pre)
 
 # now train SVM with selected features
-print "Evaluating Linear SVM classifier with SMLR's features..."
+print("Evaluating Linear SVM classifier with SMLR's features...")
 
 keepInd = (np.abs(smlr.weights).mean(axis=1)!=0)
 newtrainpat = trainpat[:, keepInd]
@@ -103,10 +103,10 @@ lsvm_confusion_sparse = ConfusionMatrix(
     predictions=pre)
 
 
-print "SMLR Percent Correct:\t%g%% (Retained %d/%d features)" % \
+print("SMLR Percent Correct:\t%g%% (Retained %d/%d features)" % \
     (smlr_confusion.percent_correct,
-     (smlr.weights!=0).sum(), np.prod(smlr.weights.shape))
-print "linear-SVM Percent Correct:\t%g%%" % \
-    (lsvm_confusion.percent_correct)
-print "linear-SVM Percent Correct (with %d features from SMLR):\t%g%%" % \
-    (keepInd.sum(), lsvm_confusion_sparse.percent_correct)
+     (smlr.weights!=0).sum(), np.prod(smlr.weights.shape)))
+print("linear-SVM Percent Correct:\t%g%%" % \
+    (lsvm_confusion.percent_correct))
+print("linear-SVM Percent Correct (with %d features from SMLR):\t%g%%" % \
+    (keepInd.sum(), lsvm_confusion_sparse.percent_correct))

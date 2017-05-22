@@ -127,7 +127,7 @@ plot_args = {
 
 for radius in [0, 1, 3]:
     # tell which one we are doing
-    print "Running searchlight with radius: %i ..." % (radius)
+    print("Running searchlight with radius: %i ..." % (radius))
 
     """
     Here we actually setup the spherical searchlight by configuring the
@@ -185,7 +185,7 @@ for radius in [0, 1, 3]:
 
     fig = pl.figure(figsize=(12, 4), facecolor='white')
     subfig = plot_lightbox(overlay=niftiresults,
-                           vlim=(0.5, None), slices=range(23,31),
+                           vlim=(0.5, None), slices=list(range(23,31)),
                            fig=fig, **plot_args)
     pl.title('Accuracy distribution for radius %i' % radius)
 

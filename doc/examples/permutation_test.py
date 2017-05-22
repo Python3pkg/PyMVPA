@@ -127,7 +127,7 @@ Now we have a usual cross-validation error and ``cv`` stores
 :term:`conditional attribute`s such as confusion matrices`:
 """
 
-print 'CV-error:', 1 - cv.ca.stats.stats['ACC']
+print('CV-error:', 1 - cv.ca.stats.stats['ACC'])
 
 """
 However, in addition it also provides the results of the statistical
@@ -141,7 +141,7 @@ appear sensible later on, the p-value is contained in a dataset.
 p = cv.ca.null_prob
 # should be exactly one p-value
 assert(p.shape == (1,1))
-print 'Corresponding p-value:',  np.asscalar(p)
+print('Corresponding p-value:',  np.asscalar(p))
 
 """
 We can now look at the distribution of the errors under *H0* and plot the
@@ -181,7 +181,7 @@ cv = CrossValidation(clf, partitioner,
 err = cv(ds)
 
 assert (err.shape == (2,1))
-print 'CV-errors:', np.ravel(err)
+print('CV-errors:', np.ravel(err))
 
 """
 Now we get two errors -- one for each cross-validation fold and
@@ -190,7 +190,7 @@ most importantly, we also get the two associated p-values.
 
 p = cv.ca.null_prob
 assert(p.shape == (2,1))
-print 'Corresponding p-values:',  np.ravel(p)
+print('Corresponding p-values:',  np.ravel(p))
 
 """
 What happened is that a dedicated *Null* distribution has been estimated for
@@ -290,9 +290,9 @@ Now we just need to run it, and plot the results the same way we did before.
 """
 
 err = cv(ds)
-print 'CV-errors:', np.ravel(err)
+print('CV-errors:', np.ravel(err))
 p = cv.ca.null_prob
-print 'Corresponding p-values:',  np.ravel(p)
+print('Corresponding p-values:',  np.ravel(p))
 # plot
 plot_cv_results(cv, err,
                 'Per CV-fold classification error (only training permutation)')

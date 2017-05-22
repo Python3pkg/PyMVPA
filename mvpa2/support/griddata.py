@@ -30,7 +30,7 @@ if externals.exists('griddata', raise_=True):
             # crazy name with close to zero possibility to cause whatever
             __name__ = 'iaugf9zrkjsbdv91'
             try:
-                from griddata import griddata
+                from .griddata import griddata
                 # restore old settings
                 __name__ = oldname
             except ImportError:

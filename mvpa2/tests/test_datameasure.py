@@ -44,6 +44,7 @@ from mvpa2.measures.base import Measure, \
 from mvpa2.measures.anova import OneWayAnova, CompoundOneWayAnova
 from mvpa2.measures.irelief import IterativeRelief, IterativeReliefOnline, \
      IterativeRelief_Devel, IterativeReliefOnline_Devel
+from functools import reduce
 
 
 _MEASURES_2_SWEEP = [ OneWayAnova(),
@@ -666,5 +667,5 @@ def suite():  # pragma: no cover
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()

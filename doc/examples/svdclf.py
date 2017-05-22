@@ -77,7 +77,7 @@ results = []
 labels = []
 
 for desc, clf in clfs:
-    print desc.replace('\n', ' ')
+    print(desc.replace('\n', ' '))
     cv = CrossValidation(clf, NFoldPartitioner())
     res = cv(dataset)
     # there is only one 'feature' i.e. the error in the returned

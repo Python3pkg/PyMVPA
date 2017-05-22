@@ -72,8 +72,8 @@ rows and columns.
 def plot_mtx(mtx, labels, title):
     pl.figure()
     pl.imshow(mtx, interpolation='nearest')
-    pl.xticks(range(len(mtx)), labels, rotation=-45)
-    pl.yticks(range(len(mtx)), labels)
+    pl.xticks(list(range(len(mtx))), labels, rotation=-45)
+    pl.yticks(list(range(len(mtx))), labels)
     pl.title(title)
     pl.clim((0, 2))
     pl.colorbar()
@@ -127,8 +127,8 @@ the location in the brain where brain response patterns are most dissimilar.
 
 # score each searchlight sphere result wrt global pattern dissimilarity
 distinctiveness = np.sum(np.abs(slres), axis=0)
-print 'Most dissimilar patterns around', \
-        mtds.fa.voxel_indices[distinctiveness.argmax()]
+print('Most dissimilar patterns around', \
+        mtds.fa.voxel_indices[distinctiveness.argmax()])
 # take a look at the this dissimilarity structure
 from scipy.spatial.distance import squareform
 plot_mtx(squareform(slres.samples[:, distinctiveness.argmax()]),
@@ -170,8 +170,8 @@ dissimilarity matrix.
 
 # mean correlation
 mean_consistency = np.mean(slres_cons, axis=0)
-print 'Most stable dissimilarity patterns around', \
-        mtds.fa.voxel_indices[mean_consistency.argmax()]
+print('Most stable dissimilarity patterns around', \
+        mtds.fa.voxel_indices[mean_consistency.argmax()])
 # Look at this pattern
 plot_mtx(squareform(slres.samples[:, mean_consistency.argmax()]),
          mtds.sa.targets,

@@ -134,7 +134,7 @@ class M1NNSearchlight(SimpleStatBaseSearchlight):
             dist_pl_pl2_sl = np.zeros(diff_pl_pl2.shape[:-1] + (nroi_fids,))
             indexsum_fx(diff_pl_pl2, roi_fids, out=dist_pl_pl2_sl)
         elif self._distance == 'correlation':
-            roi_nfids = np.array(map(len, roi_fids))  #  # voxels in each ROI
+            roi_nfids = np.array(list(map(len, roi_fids)))  #  # voxels in each ROI
 
             # estimate the means of each of the searchlight within each condition
             #   indexsum, divide by # of elements
@@ -155,7 +155,7 @@ class M1NNSearchlight(SimpleStatBaseSearchlight):
             # So let's stop being (way too) smart and just do per each ROI for now
             dist_pl_pl2_sl = np.ones((nlabels, nlabels, nroi_fids))
             for i, (fids, nfids, mean_train, mean_test) in enumerate(
-                    zip(roi_fids, roi_nfids, roi_means_train.T, roi_means_test.T)):
+                    list(zip(roi_fids, roi_nfids, roi_means_train.T, roi_means_test.T))):
                 # Select those means from train and test
                 # OPT: I could have avoided computing demeaned, but oh well -- will leave it for someone
                 # to investigate on how much speed up it would get

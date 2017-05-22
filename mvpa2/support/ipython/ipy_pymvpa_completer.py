@@ -68,7 +68,7 @@ def pymvpa_completer(self, event):
     # it's a Collection object, lets add its keys
     attrs = dir2(obj)
     #print "adding ", obj.keys()
-    attrs += obj.keys()
+    attrs += list(obj.keys())
 
     # Let's also respect the user's readline_omit__names setting:
     omit__names = ipget().IP.Completer.omit__names
@@ -100,10 +100,10 @@ if __name__ == '__main__':
     assert(not 'targets' in  ip.complete('t.sa.'))
     assert(not 'chunks' in  ip.complete('t.sa.'))
 
-    from ipy_pymvpa_completer import activate
+    from .ipy_pymvpa_completer import activate
     activate()
     # A few simplistic tests
     assert ip.complete('t.ed') == []
     assert('targets' in  ip.complete('t.sa.'))
     assert('chunks' in  ip.complete('t.sa.'))
-    print 'Tests OK'
+    print('Tests OK')

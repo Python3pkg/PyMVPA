@@ -31,7 +31,7 @@ if externals.exists('pylab', raise_=True):
         # crazy name with close to zero possibility to cause whatever
         __name__ = 'iaugf9zrkjsasdf1'
         try:
-            import pylab as pl
+            from . import pylab as pl
             # restore old settings
             __name__ = oldname
         except ImportError:

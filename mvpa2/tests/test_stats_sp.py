@@ -137,9 +137,9 @@ class StatsTestsScipy(unittest.TestCase):
                 msg="Some bogus features should have low t-score of %g."
                     "Got (t,p,sens):%s"
                     % (bogus_min,
-                        zip(m.ca.null_t[0, ds.a.bogus_features],
+                        list(zip(m.ca.null_t[0, ds.a.bogus_features],
                             m.ca.null_prob[0, ds.a.bogus_features],
-                            score.samples[0][ds.a.bogus_features])))
+                            score.samples[0][ds.a.bogus_features]))))
 
     @reseed_rng()
     def test_negative_t(self):
@@ -255,7 +255,7 @@ class StatsTestsScipy(unittest.TestCase):
         try:
             # actually I haven't managed to cause this error
             scipy.stats.rdist(1.32, 0, 1).pdf(-1.0 + np.finfo(float).eps)
-        except Exception, e:
+        except Exception as e:
             self.fail('Failed to compute rdist.pdf due to numeric'
                       ' loss of precision. Exception was %s' % e)
 
@@ -278,10 +278,10 @@ class StatsTestsScipy(unittest.TestCase):
             #import pydb
             #pydb.debugger(dbg_cmds=['bt', 'l', 's']*300 + ['c'])
             scipy.stats.rdist(1.32, 0, 1).cdf(-1.0 + np.finfo(float).eps)
-        except IndexError, e:
+        except IndexError as e:
             self.fail('Failed due to bug which leads to InvalidIndex if only'
                       ' scalar is provided to cdf')
-        except Exception, e:
+        except Exception as e:
             self.fail('Failed to compute rdist.cdf due to numeric'
                       ' loss of precision. Exception was %s' % e)
 
@@ -407,7 +407,7 @@ def test_binomial_proportion_ci():
         'logit': (.4032, .5968),
         'anscombe': (.4037, .5963)
     }
-    for m in matlab_truth.keys():
+    for m in list(matlab_truth.keys()):
         npt.assert_array_almost_equal(matlab_truth[m],
                                       binomial_proportion_ci(n, X, p, m),
                                       decimal=4,
@@ -432,6 +432,6 @@ def suite():  # pragma: no cover
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()
 

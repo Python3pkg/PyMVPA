@@ -32,7 +32,7 @@ t0 = -meg.timepoints[0]
 plots = [ {'label' : meg.channelids[i],
            'color' : colors[i],
            'data' : meg.data[:, i, :]}
-          for i in xrange(len(meg.channelids)) ]
+          for i in range(len(meg.channelids)) ]
 
 # Common arguments for all plots
 cargs = {

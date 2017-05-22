@@ -191,7 +191,7 @@ class ComplexConstraintsTests(unittest.TestCase):
 
 
 if __name__ == '__main__':  # pragma: no cover
-    import runner
+    from . import runner
     runner.run()
 
 
